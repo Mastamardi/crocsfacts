@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crocodile Facts</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f8ff;
+            color: #333;
+            text-align: center;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            background-color: #fff;
+        }
+
+        h1 {
+            color: #2c3e50;
+        }
+
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        li {
+            margin: 10px 0;
+            padding: 10px;
+            border: 1px solid #2c3e50;
+            border-radius: 5px;
+            background-color: #ecf0f1;
+        }
+
+        button {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            background-color: #2c3e50;
+            color: white;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #34495e;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Crocodile Facts</h1>
+        <ul id="facts-list"></ul>
+        <button id="generate-fact">Generate Random Fact</button>
+    </div>
+    <script>
+        const facts = [
+            "Crocodiles have been around for over 200 million years, making them one of the oldest living species on Earth.",
+            "As cold-blooded reptiles, crocodiles rely on external temperatures to regulate their body heat, often basking in the sun to warm up.",
+            "Crocodiles have one of the strongest bites in the animal kingdom, with a bite force that can exceed 3,700 pounds per square inch (psi).",
+            "They can swim at speeds of up to 20 miles per hour (32 km/h) in short bursts, thanks to their powerful tails.",
+            "Crocodiles communicate using a variety of sounds, including growls, hisses, and even bellows, especially during mating season.",
+            "Unlike many reptiles, female crocodiles exhibit parental care, guarding their nests and helping hatchlings reach the water.",
+            "Crocodiles have excellent color vision, which helps them spot prey in their natural habitats.",
+            "Crocodiles can live for several decades, with some species living over 70 years in the wild.",
+            "They are opportunistic feeders and can eat a wide range of prey, including fish, birds, mammals, and even other reptiles.",
+            "There are around 15 different species of crocodiles, including the Nile crocodile, saltwater crocodile, and American crocodile, each adapted to different environments."
+        ];
+
+        document.getElementById('generate-fact').addEventListener('click', function() {
+            const randomIndex = Math.floor(Math.random() * facts.length);
+            const factList = document.getElementById('facts-list');
+            const newFact = document.createElement('li');
+            newFact.textContent = facts[randomIndex];
+            factList.appendChild(newFact);
+        });
+    </script>
+</body>
+</html>
