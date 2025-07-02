@@ -1,0 +1,1118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Romance Social Media - Electronics Store</title>
+    <style>
+        /* Reset and Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f8f9fa;
+        }
+
+        /* Header and Navigation */
+        .header {
+            background: #fff;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 70px;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            color: #007bff;
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 30px;
+        }
+
+        .nav-menu li a {
+            text-decoration: none;
+            color: #333;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .nav-menu li a:hover {
+            color: #007bff;
+        }
+
+        .search-container {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .search-box {
+            padding: 8px 15px;
+            border: 2px solid #ddd;
+            border-radius: 25px;
+            outline: none;
+            width: 250px;
+            transition: border-color 0.3s;
+        }
+
+        .search-box:focus {
+            border-color: #007bff;
+        }
+
+        .cart-icon {
+            position: relative;
+            cursor: pointer;
+            padding: 10px;
+            background: #007bff;
+            color: white;
+            border-radius: 50%;
+            font-size: 18px;
+        }
+
+        .cart-count {
+            position: absolute;
+            top: -5px;
+            right: -5px;
+            background: #dc3545;
+            color: white;
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+        }
+
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+        }
+
+        .hamburger span {
+            width: 25px;
+            height: 3px;
+            background: #333;
+            margin: 3px 0;
+            transition: 0.3s;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 80px 0;
+            text-align: center;
+        }
+
+        .hero-content h1 {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            font-weight: 700;
+        }
+
+        .hero-content p {
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .cta-button {
+            background: #fff;
+            color: #667eea;
+            padding: 15px 30px;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.3s;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-2px);
+        }
+
+        /* Container */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Section Styles */
+        .section {
+            padding: 60px 0;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 50px;
+            color: #333;
+        }
+
+        /* Categories */
+        .categories {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 30px;
+            margin-bottom: 60px;
+        }
+
+        .category-card {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            text-align: center;
+            cursor: pointer;
+            transition: transform 0.3s, box-shadow 0.3s;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .category-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.15);
+        }
+
+        .category-icon {
+            font-size: 3rem;
+            margin-bottom: 15px;
+        }
+
+        /* Product Grid */
+        .filter-bar {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 40px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .filter-btn {
+            padding: 10px 20px;
+            border: 2px solid #007bff;
+            background: white;
+            color: #007bff;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .filter-btn.active,
+        .filter-btn:hover {
+            background: #007bff;
+            color: white;
+        }
+
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+
+        .product-card {
+            background: white;
+            border-radius: 15px;
+            padding: 20px;
+            text-align: center;
+            transition: transform 0.3s, box-shadow 0.3s;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .product-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.15);
+        }
+
+        .product-image {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 10px;
+            margin-bottom: 15px;
+        }
+
+        .product-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 10px;
+            color: #333;
+        }
+
+        .product-price {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #007bff;
+            margin-bottom: 15px;
+        }
+
+        .product-buttons {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+        }
+
+        .btn {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+
+        .btn-primary {
+            background: #007bff;
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: #0056b3;
+        }
+
+        .btn-secondary {
+            background: #6c757d;
+            color: white;
+        }
+
+        .btn-secondary:hover {
+            background: #545b62;
+        }
+
+        /* Cart Sidebar */
+        .cart-sidebar {
+            position: fixed;
+            top: 0;
+            right: -400px;
+            width: 400px;
+            height: 100vh;
+            background: white;
+            box-shadow: -5px 0 15px rgba(0,0,0,0.1);
+            transition: right 0.3s;
+            z-index: 2000;
+            overflow-y: auto;
+        }
+
+        .cart-sidebar.open {
+            right: 0;
+        }
+
+        .cart-header {
+            padding: 20px;
+            border-bottom: 1px solid #ddd;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .cart-close {
+            background: none;
+            border: none;
+            font-size: 24px;
+            cursor: pointer;
+        }
+
+        .cart-items {
+            padding: 20px;
+        }
+
+        .cart-item {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            padding: 15px 0;
+            border-bottom: 1px solid #eee;
+        }
+
+        .cart-item img {
+            width: 60px;
+            height: 60px;
+            object-fit: cover;
+            border-radius: 8px;
+        }
+
+        .cart-item-details {
+            flex: 1;
+        }
+
+        .cart-item-title {
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+
+        .cart-item-price {
+            color: #007bff;
+            font-weight: 600;
+        }
+
+        .quantity-controls {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-top: 10px;
+        }
+
+        .quantity-btn {
+            width: 30px;
+            height: 30px;
+            border: 1px solid #ddd;
+            background: white;
+            cursor: pointer;
+            border-radius: 50%;
+        }
+
+        .cart-total {
+            padding: 20px;
+            border-top: 2px solid #ddd;
+            text-align: center;
+        }
+
+        .total-amount {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #007bff;
+            margin-bottom: 20px;
+        }
+
+        /* Footer */
+        .footer {
+            background: #333;
+            color: white;
+            padding: 40px 0 20px;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+
+        .footer-section h3 {
+            margin-bottom: 20px;
+            color: #007bff;
+        }
+
+        .footer-section ul {
+            list-style: none;
+        }
+
+        .footer-section li {
+            margin-bottom: 10px;
+        }
+
+        .footer-section a {
+            color: #ccc;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-section a:hover {
+            color: #007bff;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid #555;
+            color: #ccc;
+        }
+
+        /* Contact Form */
+        .contact-form {
+            max-width: 600px;
+            margin: 0 auto;
+            background: white;
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: 600;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            outline: none;
+            transition: border-color 0.3s;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            border-color: #007bff;
+        }
+
+        /* About Section */
+        .about-content {
+            background: white;
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+
+        .about-content h3 {
+            color: #007bff;
+            margin-bottom: 20px;
+            font-size: 1.5rem;
+        }
+
+        .about-content p {
+            margin-bottom: 20px;
+            line-height: 1.8;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .hamburger {
+                display: flex;
+            }
+
+            .nav-menu {
+                position: fixed;
+                top: 70px;
+                left: -100%;
+                width: 100%;
+                height: calc(100vh - 70px);
+                background: white;
+                flex-direction: column;
+                justify-content: start;
+                align-items: center;
+                padding-top: 50px;
+                transition: left 0.3s;
+            }
+
+            .nav-menu.active {
+                left: 0;
+            }
+
+            .search-container {
+                display: none;
+            }
+
+            .hero-content h1 {
+                font-size: 2rem;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+
+            .products-grid {
+                grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+                gap: 20px;
+            }
+
+            .cart-sidebar {
+                width: 100%;
+                right: -100%;
+            }
+
+            .footer-content {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+
+            .contact-form {
+                margin: 0 20px;
+                padding: 30px 20px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .products-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .filter-bar {
+                justify-content: center;
+            }
+
+            .filter-btn {
+                font-size: 14px;
+                padding: 8px 16px;
+            }
+        }
+
+        /* Hidden sections */
+        .section.hidden {
+            display: none;
+        }
+
+        /* Search highlight */
+        .highlight {
+            background-color: yellow;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="nav-container">
+            <div class="logo">📱 Romance Social Media</div>
+            <nav>
+                <ul class="nav-menu" id="navMenu">
+                    <li><a href="#" onclick="showSection('home')">Home</a></li>
+                    <li><a href="#" onclick="showSection('products')">Products</a></li>
+                    <li><a href="#" onclick="showSection('about')">About</a></li>
+                    <li><a href="#" onclick="showSection('contact')">Contact</a></li>
+                </ul>
+            </nav>
+            <div class="search-container">
+                <input type="text" class="search-box" id="searchBox" placeholder="Search products...">
+                <div class="cart-icon" onclick="toggleCart()">
+                    🛒
+                    <span class="cart-count" id="cartCount">0</span>
+                </div>
+            </div>
+            <div class="hamburger" onclick="toggleMenu()">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </header>
+
+    <!-- Home Section -->
+    <section id="home" class="section">
+        <!-- Hero Section -->
+        <div class="hero">
+            <div class="container">
+                <div class="hero-content">
+                    <h1>Shop Smart, Live Better</h1>
+                    <p>Your One-Stop Electronic Store for the Latest Gadgets and Accessories</p>
+                    <button class="cta-button" onclick="showSection('products')">Shop Now</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Categories Section -->
+        <div class="container">
+            <h2 class="section-title">Shop by Category</h2>
+            <div class="categories">
+                <div class="category-card" onclick="filterProducts('mobile')">
+                    <div class="category-icon">📱</div>
+                    <h3>Mobile Phones</h3>
+                    <p>Latest smartphones from top brands</p>
+                </div>
+                <div class="category-card" onclick="filterProducts('audio')">
+                    <div class="category-icon">🎧</div>
+                    <h3>Audio Devices</h3>
+                    <p>Bluetooth headphones & speakers</p>
+                </div>
+                <div class="category-card" onclick="filterProducts('smartwatch')">
+                    <div class="category-icon">⌚</div>
+                    <h3>Smartwatches</h3>
+                    <p>Track your fitness and stay connected</p>
+                </div>
+                <div class="category-card" onclick="filterProducts('accessories')">
+                    <div class="category-icon">🔌</div>
+                    <h3>Accessories</h3>
+                    <p>Chargers, power banks & more</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Products Section -->
+    <section id="products" class="section hidden">
+        <div class="container">
+            <h2 class="section-title">Our Products</h2>
+            
+            <!-- Filter Bar -->
+            <div class="filter-bar">
+                <button class="filter-btn active" onclick="filterProducts('all')">All Products</button>
+                <button class="filter-btn" onclick="filterProducts('mobile')">Mobile Phones</button>
+                <button class="filter-btn" onclick="filterProducts('audio')">Audio Devices</button>
+                <button class="filter-btn" onclick="filterProducts('smartwatch')">Smartwatches</button>
+                <button class="filter-btn" onclick="filterProducts('accessories')">Accessories</button>
+            </div>
+
+            <!-- Products Grid -->
+            <div class="products-grid" id="productsGrid">
+                <!-- Products will be dynamically inserted here -->
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="section hidden">
+        <div class="container">
+            <h2 class="section-title">About Romance Social Media</h2>
+            <div class="about-content">
+                <h3>Our Mission</h3>
+                <p>At Romance Social Media, we believe in connecting people through technology. We curate the finest selection of electronic gadgets to enhance your digital lifestyle and keep you connected with what matters most.</p>
+                
+                <h3>Our Vision</h3>
+                <p>To be the leading destination for premium electronic accessories, providing exceptional quality products with outstanding customer service.</p>
+                
+                <h3>Why Choose Us?</h3>
+                <p>✅ Authentic products from trusted brands<br>
+                ✅ Competitive pricing and great deals<br>
+                ✅ Fast and secure delivery<br>
+                ✅ 24/7 customer support<br>
+                ✅ Easy returns and exchanges</p>
+                
+                <h3>Contact Information</h3>
+                <p>📧 Email: info@romancesocialmedia.com<br>
+                📞 Phone: +1 (555) 123-4567<br>
+                📍 Address: 123 Tech Street, Digital City, DC 12345</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="section hidden">
+        <div class="container">
+            <h2 class="section-title">Contact Us</h2>
+            <form class="contact-form" onsubmit="submitContactForm(event)">
+                <div class="form-group">
+                    <label for="name">Full Name</label>
+                    <input type="text" id="name" name="name" required>
+                </div>
+                <div class="form-group">
+                    <label for="email">Email Address</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+                <div class="form-group">
+                    <label for="message">Message</label>
+                    <textarea id="message" name="message" rows="5" required></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary">Send Message</button>
+            </form>
+        </div>
+    </section>
+
+    <!-- Cart Sidebar -->
+    <div class="cart-sidebar" id="cartSidebar">
+        <div class="cart-header">
+            <h3>Shopping Cart</h3>
+            <button class="cart-close" onclick="toggleCart()">×</button>
+        </div>
+        <div class="cart-items" id="cartItems">
+            <!-- Cart items will be dynamically inserted here -->
+        </div>
+        <div class="cart-total">
+            <div class="total-amount" id="totalAmount">$0.00</div>
+            <button class="btn btn-primary" onclick="checkout()">Checkout</button>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="#" onclick="showSection('home')">Home</a></li>
+                        <li><a href="#" onclick="showSection('products')">Products</a></li>
+                        <li><a href="#" onclick="showSection('about')">About Us</a></li>
+                        <li><a href="#" onclick="showSection('contact')">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Categories</h3>
+                    <ul>
+                        <li><a href="#" onclick="filterProducts('mobile')">Mobile Phones</a></li>
+                        <li><a href="#" onclick="filterProducts('audio')">Audio Devices</a></li>
+                        <li><a href="#" onclick="filterProducts('smartwatch')">Smartwatches</a></li>
+                        <li><a href="#" onclick="filterProducts('accessories')">Accessories</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Customer Service</h3>
+                    <ul>
+                        <li><a href="#">Terms & Conditions</a></li>
+                        <li><a href="#">Privacy Policy</a></li>
+                        <li><a href="#">Return Policy</a></li>
+                        <li><a href="#">Shipping Info</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Follow Us</h3>
+                    <ul>
+                        <li><a href="#">📘 Facebook</a></li>
+                        <li><a href="#">📷 Instagram</a></li>
+                        <li><a href="#">🐦 Twitter</a></li>
+                        <li><a href="#">💼 LinkedIn</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 Romance Social Media. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Products data with real product information
+        const products = [
+            {
+                id: 1,
+                title: "iPhone 15 Pro Max",
+                price: 1199,
+                category: "mobile",
+                image: "https://images.unsplash.com/photo-1695048133142-1a20484d2569?w=400&h=300&fit=crop&crop=center"
+            },
+            {
+                id: 2,
+                title: "Samsung Galaxy S24 Ultra",
+                price: 1099,
+                category: "mobile",
+                image: "https://images.unsplash.com/photo-1610945265064-0e34e5519bbf?w=400&h=300&fit=crop&crop=center"
+            },
+            {
+                id: 3,
+                title: "Apple Watch Series 9",
+                price: 399,
+                category: "smartwatch",
+                image: "https://images.unsplash.com/photo-1551816230-ef5deaed4a26?w=400&h=300&fit=crop&crop=center"
+            },
+            {
+                id: 4,
+                title: "Sony WH-1000XM5 Headphones",
+                price: 299,
+                category: "audio",
+                image: "https://images.unsplash.com/photo-1583394838336-acd977736f90?w=400&h=300&fit=crop&crop=center"
+            },
+            {
+                id: 5,
+                title: "Anker PowerCore 10000",
+                price: 49,
+                category: "accessories",
+                image: "https://images.unsplash.com/photo-1609091839311-d5365f9ff1c5?w=400&h=300&fit=crop&crop=center"
+            },
+            {
+                id: 6,
+                title: "iPad Pro 12.9-inch",
+                price: 899,
+                category: "mobile",
+                image: "https://images.unsplash.com/photo-1561154464-82e9adf32764?w=400&h=300&fit=crop&crop=center"
+            },
+            {
+                id: 7,
+                title: "AirPods Pro (2nd Gen)",
+                price: 249,
+                category: "audio",
+                image: "https://images.unsplash.com/photo-1600294037681-c80b4cb5b434?w=400&h=300&fit=crop&crop=center"
+            },
+            {
+                id: 8,
+                title: "Samsung Galaxy Watch 6",
+                price: 329,
+                category: "smartwatch",
+                image: "https://images.unsplash.com/photo-1579586337278-3f436f25d4d6?w=400&h=300&fit=crop&crop=center"
+            },
+            {
+                id: 9,
+                title: "USB-C Fast Charger 65W",
+                price: 39,
+                category: "accessories",
+                image: "https://images.unsplash.com/photo-1583863788434-e58a36330cf0?w=400&h=300&fit=crop&crop=center"
+            },
+            {
+                id: 10,
+                title: "Google Pixel 8 Pro",
+                price: 999,
+                category: "mobile",
+                image: "https://images.unsplash.com/photo-1598300042247-d088f8ab3a91?w=400&h=300&fit=crop&crop=center"
+            },
+            {
+                id: 11,
+                title: "JBL Charge 5 Speaker",
+                price: 149,
+                category: "audio",
+                image: "https://images.unsplash.com/photo-1608043152269-423dbba4e7e1?w=400&h=300&fit=crop&crop=center"
+            },
+            {
+                id: 12,
+                title: "Wireless Charging Pad",
+                price: 29,
+                category: "accessories",
+                image: "https://images.unsplash.com/photo-1586953208448-b95a79798f07?w=400&h=300&fit=crop&crop=center"
+            }
+        ];
+
+        // Cart functionality
+        let cart = [];
+        let currentFilter = 'all';
+
+        // Initialize the app
+        function init() {
+            displayProducts(products);
+            setupSearch();
+        }
+
+        // Display products
+        function displayProducts(productsToShow) {
+            const grid = document.getElementById('productsGrid');
+            grid.innerHTML = '';
+
+            productsToShow.forEach(product => {
+                const productCard = `
+                    <div class="product-card" data-category="${product.category}">
+                        <img src="${product.image}" alt="${product.title}" class="product-image">
+                        <h3 class="product-title">${product.title}</h3>
+                        <div class="product-price">$${product.price}</div>
+                        <div class="product-buttons">
+                            <button class="btn btn-primary" onclick="addToCart(${product.id})">Add to Cart</button>
+                            <button class="btn btn-secondary" onclick="viewDetails(${product.id})">View Details</button>
+                        </div>
+                    </div>
+                `;
+                grid.innerHTML += productCard;
+            });
+        }
+
+        // Filter products
+        function filterProducts(category) {
+            currentFilter = category;
+            
+            // Update filter buttons
+            document.querySelectorAll('.filter-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            event.target.classList.add('active');
+
+            // Filter and display products
+            let filteredProducts = category === 'all' ? products : products.filter(p => p.category === category);
+            displayProducts(filteredProducts);
+            
+            // Show products section if filtering from categories
+            showSection('products');
+        }
+
+        // Search functionality
+        function setupSearch() {
+            const searchBox = document.getElementById('searchBox');
+            searchBox.addEventListener('input', function(e) {
+                const searchTerm = e.target.value.toLowerCase();
+                
+                let filteredProducts = products.filter(product => 
+                    product.title.toLowerCase().includes(searchTerm) ||
+                    product.category.toLowerCase().includes(searchTerm)
+                );
+
+                if (currentFilter !== 'all') {
+                    filteredProducts = filteredProducts.filter(p => p.category === currentFilter);
+                }
+
+                displayProducts(filteredProducts);
+                
+                if (searchTerm && filteredProducts.length > 0) {
+                    showSection('products');
+                }
+            });
+        }
+
+        // Add to cart
+        function addToCart(productId) {
+            const product = products.find(p => p.id === productId);
+            const existingItem = cart.find(item => item.id === productId);
+
+            if (existingItem) {
+                existingItem.quantity += 1;
+            } else {
+                cart.push({...product, quantity: 1});
+            }
+
+            updateCartUI();
+            showNotification(`${product.title} added to cart!`);
+        }
+
+        // Update cart UI
+        function updateCartUI() {
+            const cartCount = document.getElementById('cartCount');
+            const cartItems = document.getElementById('cartItems');
+            const totalAmount = document.getElementById('totalAmount');
+
+            // Update cart count
+            const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
+            cartCount.textContent = totalItems;
+
+            // Update cart items
+            cartItems.innerHTML = '';
+            let total = 0;
+
+            cart.forEach((item, index) => {
+                const itemTotal = item.price * item.quantity;
+                total += itemTotal;
+
+                const cartItem = `
+                    <div class="cart-item">
+                        <img src="${item.image}" alt="${item.title}">
+                        <div class="cart-item-details">
+                            <div class="cart-item-title">${item.title}</div>
+                            <div class="cart-item-price">$${item.price}</div>
+                            <div class="quantity-controls">
+                                <button class="quantity-btn" onclick="updateQuantity(${index}, -1)">-</button>
+                                <span>${item.quantity}</span>
+                                <button class="quantity-btn" onclick="updateQuantity(${index}, 1)">+</button>
+                                <button class="btn btn-secondary" onclick="removeFromCart(${index})" style="margin-left: 10px; padding: 5px 10px;">Remove</button>
+                            </div>
+                        </div>
+                    </div>
+                `;
+                cartItems.innerHTML += cartItem;
+            });
+
+            totalAmount.textContent = `$${total.toFixed(2)}`;
+        }
+
+        // Update quantity
+        function updateQuantity(index, change) {
+            cart[index].quantity += change;
+            if (cart[index].quantity <= 0) {
+                cart.splice(index, 1);
+            }
+            updateCartUI();
+        }
+
+        // Remove from cart
+        function removeFromCart(index) {
+            cart.splice(index, 1);
+            updateCartUI();
+        }
+
+        // Toggle cart
+        function toggleCart() {
+            const cartSidebar = document.getElementById('cartSidebar');
+            cartSidebar.classList.toggle('open');
+        }
+
+        // Checkout
+        function checkout() {
+            if (cart.length === 0) {
+                alert('Your cart is empty!');
+                return;
+            }
+            
+            const total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+            alert(`Thank you for shopping with Romance Social Media! Your order total is $${total.toFixed(2)}`);
+            cart = [];
+            updateCartUI();
+            toggleCart();
+        }
+
+        // View details
+        function viewDetails(productId) {
+            const product = products.find(p => p.id === productId);
+            alert(`Product: ${product.title}\nPrice: $${product.price}\nCategory: ${product.category}\n\nThis would open a detailed product page in a real store.`);
+        }
+
+        // Navigation functions
+        function showSection(sectionName) {
+            // Hide all sections
+            document.querySelectorAll('.section').forEach(section => {
+                section.classList.add('hidden');
+            });
+            
+            // Show selected section
+            document.getElementById(sectionName).classList.remove('hidden');
+            
+            // Close mobile menu
+            document.getElementById('navMenu').classList.remove('active');
+        }
+
+        // Toggle mobile menu
+        function toggleMenu() {
+            const navMenu = document.getElementById('navMenu');
+            navMenu.classList.toggle('active');
+        }
+
+        // Contact form submission
+        function submitContactForm(event) {
+            event.preventDefault();
+            
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            const message = document.getElementById('message').value;
+            
+            if (name && email && message) {
+                alert('Thank you for contacting us! We will get back to you soon.');
+                event.target.reset();
+            }
+        }
+
+        // Show notification
+        function showNotification(message) {
+            // Create notification element
+            const notification = document.createElement('div');
+            notification.style.cssText = `
+                position: fixed;
+                top: 20px;
+                right: 20px;
+                background: #28a745;
+                color: white;
+                padding: 15px 20px;
+                border-radius: 8px;
+                z-index: 3000;
+                animation: slideIn 0.3s ease;
+            `;
+            notification.textContent = message;
+            
+            // Add animation keyframes
+            if (!document.querySelector('#notification-style')) {
+                const style = document.createElement('style');
+                style.id = 'notification-style';
+                style.textContent = `
+                    @keyframes slideIn {
+                        from { transform: translateX(100%); opacity: 0; }
+                        to { transform: translateX(0); opacity: 1; }
+                    }
+                `;
+                document.head.appendChild(style);
+            }
+            
+            document.body.appendChild(notification);
+            
+            // Remove notification after 3 seconds
+            setTimeout(() => {
+                notification.remove();
+            }, 3000);
+        }
+
+        // Initialize app when page loads
+        document.addEventListener('DOMContentLoaded', init);
+    </script>
+</body>
+</html>
